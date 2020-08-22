@@ -1,0 +1,57 @@
+﻿@model homework8v6.Models.EmployeeDepartmentViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Employees" asp-action="Index">
+    <p>
+        <select asp-for="EmployeeDepartment" asp-items="Model.Departments">
+            <option value="">All Departments</option>
+        </select>
+
+        Full Name: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employees[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employees[0].Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employees[0].Position)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Employees)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
